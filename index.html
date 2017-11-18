@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link rel="manifest" href="manifest.json">
+
+    <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <script src="js/ng-cordova.min.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+  </head>
+  <body ng-app="starter">
+
+    <ion-pane>
+      <ion-header-bar class="bar-stable">
+        <h1 class="title">SQLite Form</h1>
+      </ion-header-bar>
+      <ion-content ng-controller="FormCtrl">
+        <div class="list">
+          <label class="item item-input">
+            <input type="text" placeholder="Name" ng-model="name">
+          </label>
+          <label class="item item-input">
+            <textarea style="resize:none" rows=4 placeholder="Address" ng-model="address"></textarea>
+          </label>
+          <label class="item item-input">
+            <input type="Date" placeholder="Date Of Birth" ng-model="DOB" >
+          </label>
+          <label class="item item-input">
+            <input type="number" placeholder="Mobile Number" ng-model="contact" maxlength="10">
+          </label>
+          <label class="item item-input" ng-show="alternateNumberRequired">
+            <input type="number" placeholder="Alternate Mobile Number" ng-model="contact1" maxlength="10">
+          </label>
+          <button class="button button-positive" ng-click="addMoreItem()" ng-hide="alternateNumberRequired">
+            +More
+          </button>
+        </div>
+        <button class="button button-block button-balanced" ng-click="submit()">
+          Submit
+        </button>
+        <button class="button button-block button-positive" ng-click="getRecord()">
+          Get/Refresh Records
+        </button>
+        <ul class="list">
+            <div class="item item-divider">
+              Database Values
+            </div>
+            <li class="item" ng-repeat="obj in data">
+              <h4>{{obj.name}}</h4>
+              <p>{{obj.contact}}</p>
+            </li>
+        </ul>
+      </ion-content>
+    </ion-pane>
+  </body>
+</html>
